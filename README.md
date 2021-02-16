@@ -41,7 +41,7 @@ SmallMammalR_input <- read_excel("C:/PATH/SmallMammalR_input.xlsx",
                                                "numeric", "numeric", "text", "skip"))
 
 temp1 <- SmallMammalR_input[SmallMammalR_input$n_r=='N',] %>%             #extract only new captures (1 observation per individual)
-  clean_names()%>%  #clean column names (super useful function)
+  clean_names()%>%                                                        #clean column names (super useful function)
   subset(species=='AA'|species=='AF'|species=='AS') %>%                   #extract Apodemus species
   unite("siteid2", village, year, habitat, date, sep="", remove = F) %>%  #making unique code for each site (step 1 of 2)
   unite("siteid", village, year, habitat, sep="", remove = F)             #making unique code for each site (step 2 of 2)
@@ -101,9 +101,9 @@ temp7 <- read_excel("C:/PATH/SmallMammal_coordinates_data (Salvat automat).xlsx"
   drop_na(longitude)
   
 temp8 <- read_excel("C:/PATH/SmallMammalBufferDataR.xlsx")%>% 
-  setnames(old=c("Habitat type"), new=c('habitat'))%>%  #renaming columns
+  setnames(old=c("Habitat type"), new=c('habitat'))%>%                    #renaming columns
   clean_names()%>%                                                        #cleaning names
-   unite("siteid", village, year, habitat, sep="", remove = F) %>%        #creating new unique variable
+  unite("siteid", village, year, habitat, sep="", remove = F) %>%         #creating new unique variable
   full_join(temp7, by='siteid')%>%                                        #joining dataframes
   mutate(habitat = case_when((habitat=="RE") ~ "WE",                      #correcting some data entry errors
                              TRUE ~ as.character(.$habitat)))%>% 
