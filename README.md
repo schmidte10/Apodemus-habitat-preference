@@ -5,6 +5,7 @@ Description of statistical analysis run for 'investigating habitat preferences o
 ### Date: 15/02/2021 
 
 ## Set path
+You will need to set your own path here
 ```{set working directory, warning=F, message=F}
 setwd("C:/PATH")
 ```
@@ -31,7 +32,7 @@ library(emmeans)
 ```
 ## Data importing, cleaning, and organizing
 ```{r data_organization, warning=F, message=F}
-SmallMammalR_input <- read_excel("C:/PATH/FOLDER/SmallMammalR_input.xlsx", 
+SmallMammalR_input <- read_excel("C:/PATH/SmallMammalR_input.xlsx", 
                                  col_types = c("text", "text", "numeric", 
                                                "text", "numeric", "date", "numeric", 
                                                "text", "text", "text", "text", "text", 
@@ -85,7 +86,7 @@ temp6 <- temp3 %>% full_join(temp5, by='siteid')%>%                 #joining 'te
 ```
 Importing geospatial data 
 ```
-temp7 <- read_excel("C:/PATH/FOLDER/SmallMammal_coordinates_data (Salvat automat).xlsx", 
+temp7 <- read_excel("C:/PATH/SmallMammal_coordinates_data (Salvat automat).xlsx", 
                                                            col_types = c("skip", "text", "numeric", 
                                                                          "numeric", "numeric", "text", "numeric", 
                                                                          "numeric", "numeric", "numeric"))%>% 
@@ -99,7 +100,7 @@ temp7 <- read_excel("C:/PATH/FOLDER/SmallMammal_coordinates_data (Salvat automat
   mutate(dist_village=dist_village*1000)%>% 
   drop_na(longitude)
   
-temp8 <- read_excel("C:/PATH/FOLDER/SmallMammalBufferDataR.xlsx")%>% 
+temp8 <- read_excel("C:/PATH/SmallMammalBufferDataR.xlsx")%>% 
   setnames(old=c("Habitat type"), new=c('habitat'))%>%  #renaming columns
   clean_names()%>%                                                        #cleaning names
    unite("siteid", village, year, habitat, sep="", remove = F) %>%        #creating new unique variable
